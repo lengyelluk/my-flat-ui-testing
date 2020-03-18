@@ -15,8 +15,6 @@ import org.openqa.selenium.support.ui.Select;
 
 public class RentOutRoomPage extends Page {
 
-    protected static final Logger logger = LogManager.getLogger(AppliLoginWithAddsPage.class);
-
     @FindBy(how = How.XPATH, using="//select")
     private WebElement districtDropdown;
 

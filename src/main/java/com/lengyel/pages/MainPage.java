@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage extends Page {
 
-    protected static final Logger logger = LogManager.getLogger(AppliLoginWithAddsPage.class);
-
     @FindBy(how = How.XPATH, using="//img[contains(@src,'rentOutRoom')]")
     private WebElement rentOutRoomLink;
 

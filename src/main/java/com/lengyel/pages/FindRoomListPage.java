@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class FindRoomListPage extends Page {
 
-    protected static final Logger logger = LogManager.getLogger(AppliLoginWithAddsPage.class);
-
     @FindBy(how = How.XPATH, using="(//div[@class='grid']//h3)[1]")
     private WebElement firstCard;
 

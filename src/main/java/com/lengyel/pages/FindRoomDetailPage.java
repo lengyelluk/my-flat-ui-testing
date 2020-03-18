@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class FindRoomDetailPage extends Page {
 
-    protected static final Logger logger = LogManager.getLogger(AppliLoginWithAddsPage.class);
-
     @FindBy(how = How.XPATH, using="(//h3[@class='heading']/following-sibling::p)[1]")
     private WebElement priceCheck;
 

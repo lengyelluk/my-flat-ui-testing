@@ -18,7 +18,7 @@ public class RentOutRoomTest {
 
     @BeforeTest
     public void setup () {
-        System.setProperty("webdriver.chrome.driver", "src/main/java/com/lengyel/vendor/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/main/java/com/lengyel/vendor/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
