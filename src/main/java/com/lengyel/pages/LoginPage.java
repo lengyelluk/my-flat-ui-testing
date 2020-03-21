@@ -41,8 +41,9 @@ public class LoginPage extends Page {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginButton.click();
-        driverWait().until(ExpectedConditions.invisibilityOf(emailField));
+        logger.info("login button clicked");
         homeButton.click();
+        logger.info('home button clicked');
         return new AuthenticatedMainPage(driver());
     }
 
