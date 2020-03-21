@@ -50,7 +50,11 @@ public class FindRoomDetailPage extends Page {
         String smokingAllowed = "Smoking Allowed";
         String petAllowed = "Pet Allowed";
 
-
+        try {
+        Thread.sleep(2000);
+        } catch (Exception e) {
+            logger.info("waiting for flat details to load");
+        }
         driverWait().until(ExpectedConditions.visibilityOf(priceCheck));
         
         String priceCheckValue = priceCheck.getText();
@@ -69,7 +73,7 @@ public class FindRoomDetailPage extends Page {
         logger.info(smokingAllowedCheckValue);
         logger.info(petAllowedCheckValue);
 
-        assertActions().assertEquals(price, priceCheckValue);
+        assertActions().assertEquals(priceCheckValue, price);
         /*assertActions().assertEquals(location, locationCheckValue);
         assertActions().assertEquals(price, priceCheckValue);
         assertActions().assertEquals(price, priceCheckValue);
