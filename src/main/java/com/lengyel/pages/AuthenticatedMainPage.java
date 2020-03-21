@@ -22,6 +22,8 @@ public class AuthenticatedMainPage extends Page {
     @FindBy(how = How.XPATH, using="//img[contains(@src,'findRoom')]")
     private WebElement findRoomLink;
 
+    @FindBy(how = How.XPATH, using="//a[@href='/' and @class='item']")
+    private WebElement homeButton;
 
     public AuthenticatedMainPage(WebDriver driver) {
         super("AuthenticatedMainPage", "https://new-my-flat-app.herokuapp.com/", driver);
@@ -43,6 +45,12 @@ public class AuthenticatedMainPage extends Page {
             logger.info("Welcome message not displayed");
         }
         assertActions().assertTrue(welcomeMsgDisplayed, "User logged in");
+    }
+
+    public void goToHomePage() {
+        driverWait().until(ExpectedConditions.visibilityOf(homeButton));
+        homeButton.click();
+        logger.info("home button clicked");
     }
 
     public RentOutRoomPage goToRentOutRoomPage() {

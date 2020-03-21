@@ -52,7 +52,7 @@ public class RentOutRoomTest {
         loginPage = mainPage.goToLoginPage();
         authenticatedMainPage = loginPage.loginUser(email, password);
         authenticatedMainPage.checkUserLoggedIn();
-        
+        authenticatedMainPage.goToHomePage();
         rentOutRoomPage = authenticatedMainPage.goToRentOutRoomPage();
         rentOutRoomPage.setFlatDetails();
         //AssertActions.checkForVerificationErrors(sessionId);

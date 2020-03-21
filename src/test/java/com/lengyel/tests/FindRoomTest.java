@@ -55,6 +55,7 @@ public class FindRoomTest {
         loginPage = mainPage.goToLoginPage();
         authenticatedMainPage = loginPage.loginUser(email, password);
         authenticatedMainPage.checkUserLoggedIn();
+        authenticatedMainPage.goToHomePage();
         findRoomListPage = authenticatedMainPage.goToFindRoomPage();
         findRoomDetailPage = findRoomListPage.openSpecificRoom("Best flat ever");
         findRoomDetailPage.checkRoomDetails();
