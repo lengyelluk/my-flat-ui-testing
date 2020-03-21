@@ -20,7 +20,7 @@ public class FindRoomListPage extends Page {
         super("FindRoomListPage", "https://new-my-flat-app.herokuapp.com/flatList", driver);
 
         PageFactory.initElements(driver, this);
-        driver().get(url());
+        //driver().get(url());
 
         if(isDisplayed() == false) {
             throw new RuntimeException("FindRoomListPage is not displayed!");

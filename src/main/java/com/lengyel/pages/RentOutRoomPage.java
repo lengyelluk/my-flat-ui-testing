@@ -104,7 +104,7 @@ public class RentOutRoomPage extends Page {
         super("RentOutRoomPage", "https://new-my-flat-app.herokuapp.com/addFlat", driver);
 
         PageFactory.initElements(driver, this);
-        driver().get(url());
+        //driver().get(url());
 
         if(isDisplayed() == false) {
             throw new RuntimeException("RentOutRoomPage is not displayed!");

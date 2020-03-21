@@ -27,7 +27,7 @@ public class AuthenticatedMainPage extends Page {
         super("AuthenticatedMainPage", "https://new-my-flat-app.herokuapp.com/", driver);
 
         PageFactory.initElements(driver, this);
-        driver().get(url());
+        //driver().get(url());
 
         if(isDisplayed() == false) {
             throw new RuntimeException("AuthenticatedMainPage is not displayed!");

@@ -25,7 +25,7 @@ public class LoginPage extends Page {
         super("LoginPage", "https://new-my-flat-app.herokuapp.com/login", driver);
 
         PageFactory.initElements(driver, this);
-        driver().get(url());
+        //driver().get(url());
 
         if(isDisplayed() == false) {
             throw new RuntimeException("LoginPage is not displayed!");
