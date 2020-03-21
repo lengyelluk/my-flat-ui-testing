@@ -1,6 +1,5 @@
 package com.lengyel.pages;
 
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.lengyel.actions.AssertActions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

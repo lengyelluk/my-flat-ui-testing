@@ -21,6 +21,9 @@ public class LoginPage extends Page {
     @FindBy(how = How.XPATH, using="//button[text()='Login']")
     private WebElement loginButton;
 
+    @FindBy(how = How.XPATH, using="//a[@href='/' and @class='item']")
+    private WebElement homeButton;
+
     public LoginPage(WebDriver driver) {
         super("LoginPage", "https://new-my-flat-app.herokuapp.com/login", driver);
 
@@ -38,6 +41,8 @@ public class LoginPage extends Page {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginButton.click();
+        driverWait().until(ExpectedConditions.invisibilityOf(emailField));
+        homeButton.click();
         return new AuthenticatedMainPage(driver());
     }
 
