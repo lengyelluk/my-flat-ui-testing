@@ -41,9 +41,9 @@ public class LoginPage extends Page {
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginButton.click();
-        logger.info("login button clicked");
+        System.out.println("login button clicked");
         homeButton.click();
-        logger.info('home button clicked');
+        logger.info("home button clicked");
         return new AuthenticatedMainPage(driver());
     }
 
