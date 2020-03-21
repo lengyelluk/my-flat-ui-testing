@@ -2,7 +2,7 @@
 <suite name="MyFlatAppSuite">
     <test name="SmokeTests">
         <classes>
-            <class name="com.lengyel.tests.RentOutRoomTest" />
+            <class name="com.lengyel.tests.LoginTest" />
         </classes>
     </test>
 </suite>

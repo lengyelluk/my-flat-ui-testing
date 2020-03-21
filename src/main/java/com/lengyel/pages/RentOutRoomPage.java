@@ -101,7 +101,7 @@ public class RentOutRoomPage extends Page {
     
 
     public RentOutRoomPage(WebDriver driver) {
-        super("RentOutRoomPage", "https://my-flat-app.herokuapp.com/addFlat", driver);
+        super("RentOutRoomPage", "https://new-my-flat-app.herokuapp.com/addFlat", driver);
 
         PageFactory.initElements(driver, this);
         driver().get(url());

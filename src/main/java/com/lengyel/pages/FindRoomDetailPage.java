@@ -34,13 +34,13 @@ public class FindRoomDetailPage extends Page {
     private WebElement petAllowedCheck;
 
     public FindRoomDetailPage(WebDriver driver) {
-        super("FindRoomDetailPage", "https://my-flat-app.herokuapp.com/cards", driver);
+        super("FindRoomDetailPage", "https://new-my-flat-app.herokuapp.com/cards", driver);
 
         PageFactory.initElements(driver, this);
     }
 
     public void checkRoomDetails() {
-        String price = "350";
+        String price = "350 EUR/month";
         String street = "Sancova";
         String district = "Staré Mesto";
         String menFlatmate = "1 males";
@@ -69,13 +69,12 @@ public class FindRoomDetailPage extends Page {
         logger.info(smokingAllowedCheckValue);
         logger.info(petAllowedCheckValue);
 
-        try {
-            Thread.sleep(5000);
-        } catch(Exception e){
-
-        }
-
+        assertActions().assertEquals(price, priceCheckValue);
+        /*assertActions().assertEquals(location, locationCheckValue);
+        assertActions().assertEquals(price, priceCheckValue);
+        assertActions().assertEquals(price, priceCheckValue);
+        assertActions().assertEquals(price, priceCheckValue);
+        assertActions().assertEquals(price, priceCheckValue);
+        assertActions().assertEquals(price, priceCheckValue);*/
     }
-
-    
 }

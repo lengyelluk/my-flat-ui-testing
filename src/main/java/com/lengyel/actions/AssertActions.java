@@ -1,11 +1,21 @@
 package com.lengyel.actions;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.remote.SessionId;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,21 +91,50 @@ public class AssertActions {
         verifyTrue(condition, message + " Verify for Equality: Current: " + currentValue + " against expected: " + expectedValue);
     }
 
-    public static void checkForVerificationErrors() {
+    public static void checkForVerificationErrors(SessionId sessionId) throws Exception {
+        URI uri = new URI("https://lukaslengyel1:NuSvcbafD6XJubzUBZbW@api.browserstack.com/automate/sessions/" + sessionId + ".json");
+        HttpPut putRequest = new HttpPut(uri);
+      
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        
+        nameValuePairs.add((new BasicNameValuePair("reason", "")));
+        putRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+      
+        HttpClientBuilder.create().build().execute(putRequest);
+        
         if (verifications != null) {
             try {
                 verifications.assertAll();
+                nameValuePairs.add((new BasicNameValuePair("status", "passed")));
             } catch (Error e) {
+                nameValuePairs.add((new BasicNameValuePair("status", "failed")));
                 throw e;
             } finally {
+                putRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+              
+                HttpClientBuilder.create().build().execute(putRequest);
                 verifications = new SoftAssert();
             }
         }
     }
 
-    public static String checkForVerificationErrorMessages() {
+    public static void mark() throws URISyntaxException, UnsupportedEncodingException, IOException {
+        URI uri = new URI("https://lukaslengyel1:NuSvcbafD6XJubzUBZbW@api.browserstack.com/automate/sessions/<session-id>.json");
+        HttpPut putRequest = new HttpPut(uri);
+      
+        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+        nameValuePairs.add((new BasicNameValuePair("status", "completed")));
+        nameValuePairs.add((new BasicNameValuePair("reason", "")));
+        putRequest.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+      
+        HttpClientBuilder.create().build().execute(putRequest);
+      }
+
+
+
+    public static String checkForVerificationErrorMessages(SessionId sessionId) throws Exception {
         try {
-            checkForVerificationErrors();
+            checkForVerificationErrors(sessionId);
         } catch (Error e) {
             return e.getMessage().replace("[ERROR] The following asserts failed:\n", "");
         }
@@ -175,6 +214,5 @@ public class AssertActions {
         checkPoints = new ArrayList<String>();
         return sb.toString();
     }
-
 
 }

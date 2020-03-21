@@ -2,6 +2,7 @@ package com.lengyel.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MainPage extends Page {
+public class AuthenticatedMainPage extends Page {
+
+    @FindBy(how = How.XPATH, using="//div[contains(text(), 'Welcome Test')]")
+    private WebElement welcomeMsg;
 
     @FindBy(how = How.XPATH, using="//img[contains(@src,'rentOutRoom')]")
     private WebElement rentOutRoomLink;
@@ -18,18 +22,27 @@ public class MainPage extends Page {
     @FindBy(how = How.XPATH, using="//img[contains(@src,'findRoom')]")
     private WebElement findRoomLink;
 
-    @FindBy(how = How.XPATH, using="//a[@href='/login' and @role='button']")
-    private WebElement loginButton;
 
-    public MainPage(WebDriver driver) {
-        super("MainPage", "https://new-my-flat-app.herokuapp.com/", driver);
+    public AuthenticatedMainPage(WebDriver driver) {
+        super("AuthenticatedMainPage", "https://new-my-flat-app.herokuapp.com/", driver);
 
         PageFactory.initElements(driver, this);
         driver().get(url());
 
         if(isDisplayed() == false) {
-            throw new RuntimeException("MainPage is not displayed!");
+            throw new RuntimeException("AuthenticatedMainPage is not displayed!");
         }
+    }
+
+    public void checkUserLoggedIn() {
+        boolean welcomeMsgDisplayed = false;
+        try {
+            driverWait().until(ExpectedConditions.visibilityOf(welcomeMsg));
+            welcomeMsgDisplayed = true;
+        } catch (TimeoutException e) {
+            logger.info("Welcome message not displayed");
+        }
+        assertActions().assertTrue(welcomeMsgDisplayed, "User logged in");
     }
 
     public RentOutRoomPage goToRentOutRoomPage() {
@@ -43,12 +56,4 @@ public class MainPage extends Page {
         findRoomLink.click();
         return new FindRoomListPage(driver());        
     }
-
-    public LoginPage goToLoginPage() {
-        driverWait().until(ExpectedConditions.visibilityOf(loginButton));
-        loginButton.click();
-        return new LoginPage(driver());
-    }
-
-
 }

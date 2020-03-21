@@ -17,7 +17,7 @@ public class FindRoomListPage extends Page {
 
 
     public FindRoomListPage(WebDriver driver) {
-        super("FindRoomListPage", "https://my-flat-app.herokuapp.com/flatList", driver);
+        super("FindRoomListPage", "https://new-my-flat-app.herokuapp.com/flatList", driver);
 
         PageFactory.initElements(driver, this);
         driver().get(url());
